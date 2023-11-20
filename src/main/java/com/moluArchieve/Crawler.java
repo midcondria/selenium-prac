@@ -1,20 +1,18 @@
 package com.moluArchieve;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebElement;
+import lombok.RequiredArgsConstructor;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.interactions.Actions;
 import org.springframework.stereotype.Component;
 
-import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 
 @Component
+@RequiredArgsConstructor
 public class Crawler {
+
+    private final ChromeDriver driver;
 
     public static final String URL_ENTIRE = "https://www.pixiv.net/tags/%E3%83%96%E3%83%AB%E3%83%BC%E3%82%A2%E3%83%BC%E3%82%AB%E3%82%A4%E3%83%96";
     public static final String URL_ILLUSTRATION = "https://www.pixiv.net/tags/%E3%83%96%E3%83%AB%E3%83%BC%E3%82%A2%E3%83%BC%E3%82%AB%E3%82%A4%E3%83%96/illustrations";
@@ -32,7 +30,6 @@ public class Crawler {
     public static final String IMAGE_BOX_ILLUSTRATION = "#root > div.charcoal-token > div > div:nth-child(4) > div > div > div.sc-15n9ncy-0.jORshO > section > div.sc-l7cibp-0.juyBTC > div:nth-child(1) > ul > li";
 
     public void login() throws InterruptedException {
-        ChromeDriver driver = initDriver();
         driver.get(URL_ENTIRE);
 
         driver.findElement(By.cssSelector(TO_LOGIN_PAGE_URL)).click();
@@ -44,7 +41,6 @@ public class Crawler {
     }
 
     public void getSingleImage() throws InterruptedException {
-        ChromeDriver driver = initDriver();
         driver.get(URL_ENTIRE);
 
         WebElement imageBox = driver.findElement(By.cssSelector("#root > div.charcoal-token > div > div:nth-child(4) > div > div > div.sc-15n9ncy-0.jORshO > div > section:nth-child(2) > div.sc-l7cibp-0.juyBTC > ul > li:nth-child(24) > div > div.sc-iasfms-4.kbmWzS > div > a > div.sc-rp5asc-9.cYUezH > img"));
@@ -55,7 +51,6 @@ public class Crawler {
     }
 
     public void getImages() throws InterruptedException {
-        ChromeDriver driver = initDriver();
         driver.get(URL_ILLUSTRATION);
 
         List<String> images = new ArrayList<>();
@@ -65,17 +60,6 @@ public class Crawler {
             images.add(imageUrl);
             System.out.println(imageUrl);
         }
-
         driver.quit();
-    }
-
-    private static ChromeDriver initDriver() {
-        System.setProperty("webdriver.chrome.driver", "driver/chromedriver.exe");
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--remote-allow-origins=*");
-        ChromeDriver driver = new ChromeDriver(options);
-        driver.manage().timeouts().implicitlyWait(Duration.ofMinutes(3));
-        driver.manage().window().maximize();
-        return driver;
     }
 }
