@@ -5,6 +5,10 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThat;
+
 @SpringBootTest
 class CrawlerTest {
 
@@ -29,6 +33,8 @@ class CrawlerTest {
     @Test
     void getImages() throws InterruptedException {
         // given
-        crawler.getImages();
+        List<String> result = crawler.getImages();
+
+        assertThat(result.size()).isEqualTo(60);
     }
 }
