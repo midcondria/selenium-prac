@@ -8,9 +8,8 @@ import org.springframework.context.annotation.Configuration;
 import java.time.Duration;
 
 @Configuration
-public class CrawlerConfig {
+public class SeleniumConfig {
 
-    @Bean
     public ChromeDriver chromeDriver() {
         System.setProperty("webdriver.chrome.driver", "driver/chromedriver.exe");
         ChromeOptions options = new ChromeOptions();
