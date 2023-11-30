@@ -22,19 +22,22 @@ repositories {
 }
 
 dependencies {
+	// 스프링부트
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 
+	// 셀레니움
+	implementation 'org.seleniumhq.selenium:selenium-java:4.14.1'
 
-	implementation group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '4.14.1'
-
+	// 웹플럭스
 	implementation 'org.springframework.boot:spring-boot-starter-webflux'
 
-
+	// DB connection
 	runtimeOnly 'com.h2database:h2'
 	runtimeOnly 'com.mysql:mysql-connector-j'
 
+	// 롬복
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
 
