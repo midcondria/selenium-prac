@@ -17,24 +17,33 @@ class CrawlerTest {
 
     @DisplayName("로그인 테스트")
     @Test
-    void login() throws InterruptedException {
+    void login() {
         // given
         crawler.login();
     }
 
     @DisplayName("짤 한장만")
     @Test
-    void getSingleImage() throws InterruptedException {
+    void getSingleImage() {
         // given
         crawler.getSingleImage();
     }
 
     @DisplayName("짤 긁어오기")
     @Test
-    void getImages() throws InterruptedException {
+    void getImages() {
         // given
         List<String> result = crawler.getImages();
 
+        assertThat(result.size()).isEqualTo(60);
+    }
+
+    @DisplayName("")
+    @Test
+    void downloadImages() {
+        // given
+        List<String> result = crawler.downloadImages();
+        // expected
         assertThat(result.size()).isEqualTo(60);
     }
 }
